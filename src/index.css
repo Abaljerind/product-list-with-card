@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-red-hat: "Red Hat Text", serif;
+
+  --color-reds: rgb(183, 50, 46);
+  --color-greens: rgb(29, 138, 91);
+
+  --color-rose-50: rgb(254, 250, 247);
+  --color-rose-100: rgb(241, 227, 219);
+  --color-rose-300: rgb(202, 177, 170);
+  --color-rose-400: rgb(170, 144, 137);
+  --color-rose-500: rgb(117, 99, 94);
+  --color-rose-900: rgb(24, 8, 8);
+}
