@@ -1,11 +1,14 @@
 import { useState } from "react";
 import foodData from "../data.json";
-import cart from "/images/icon-add-to-cart.svg";
+import cartIcon from "/images/icon-add-to-cart.svg";
 import emptyCart from "/images/illustration-empty-cart.svg";
+import plus from "/images/icon-increment-quantity.svg";
+import minus from "/images/icon-decrement-quantity.svg";
 
 document.body.style.backgroundColor = "rgb(254, 250, 247)";
 function App() {
   const [data, setData] = useState(foodData);
+  const [cart, setCart] = useState([]);
 
   return (
     <>
@@ -23,10 +26,31 @@ function App() {
               alt={food.name}
               className="rounded-[12px]"
             />
-            <button className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900">
-              <img src={cart} alt="Add to cart icon" className="scale-110" />{" "}
+            <div className="bg-reds mx-auto -mt-[30px] flex w-48 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+              <button>
+                <img
+                  src={minus}
+                  alt="Icon decrement"
+                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                />
+              </button>
+              <p>1</p>
+              <button>
+                <img
+                  src={plus}
+                  alt="Icon decrement"
+                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                />
+              </button>
+            </div>
+            {/* <button className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900">
+              <img
+                src={cartIcon}
+                alt="Add to cart icon"
+                className="scale-110"
+              />{" "}
               Add to Cart
-            </button>
+            </button> */}
             <small className="mt-4 text-[16px] font-medium text-rose-500">
               {food.category}
             </small>
