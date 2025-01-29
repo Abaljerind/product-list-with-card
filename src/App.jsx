@@ -28,7 +28,7 @@ function App() {
               alt={food.name}
               className="rounded-[12px]"
             />
-            <div className="bg-reds mx-auto -mt-[30px] flex w-48 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+            <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
               <button>
                 <img
                   src={minus}
