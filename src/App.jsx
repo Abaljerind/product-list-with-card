@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import foodData from "../data.json";
 import cartIcon from "/images/icon-add-to-cart.svg";
 import emptyCart from "/images/illustration-empty-cart.svg";
@@ -11,6 +11,32 @@ document.body.style.backgroundColor = "rgb(254, 250, 247)";
 function App() {
   const [data, setData] = useState(foodData);
   const [cart, setCart] = useState([]);
+
+  function handleAddFood(food) {
+    const id = `${food.name}-${food.price}`;
+
+    const newFood = {
+      id,
+      name: food.name,
+      price: food.price,
+      quantity: 1,
+    };
+
+    // check if food already add to cart or no
+    const existingFood = cart.find((item) => item.id === newFood.id);
+
+    if (existingFood) {
+      setCart((prevCart) =>
+        prevCart.map((item) =>
+          item.id === newFood.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item,
+        ),
+      );
+    } else {
+      setCart((prevFood) => [...prevFood, newFood]);
+    }
+  }
 
   return (
     <>
@@ -28,31 +54,35 @@ function App() {
               alt={food.name}
               className="rounded-[12px]"
             />
-            <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
-              <button>
-                <img
-                  src={minus}
-                  alt="Icon decrement"
-                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                />
-              </button>
-              <p>1</p>
-              <button>
-                <img
-                  src={plus}
-                  alt="Icon decrement"
-                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                />
-              </button>
-            </div>
-            {/* <button className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900">
+
+            {/* <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+                <button>
+                  <img
+                    src={minus}
+                    alt="Icon decrement"
+                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                  />
+                </button>
+                <p>1</p>
+                <button>
+                  <img
+                    src={plus}
+                    alt="Icon decrement"
+                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                  />
+                </button>
+              </div> */}
+            <button
+              className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
+              onClick={() => handleAddFood(food)}
+            >
               <img
                 src={cartIcon}
                 alt="Add to cart icon"
                 className="scale-110"
               />{" "}
               Add to Cart
-            </button> */}
+            </button>
             <small className="mt-4 text-[16px] font-medium text-rose-500">
               {food.category}
             </small>
