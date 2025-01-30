@@ -36,12 +36,42 @@ function App() {
     }
   }
 
+  function increment(food) {
+    setCart((prevCart) =>
+      prevCart.map((item) => {
+        return item.id === food.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item;
+      }),
+    );
+  }
+
+  function decrement(food) {
+    setCart((prevCart) =>
+      prevCart
+        .map((item) => {
+          return item.id === food.id
+            ? { ...item, quantity: item.quantity - 1 }
+            : item;
+        })
+        .filter((item) => item.quantity > 0),
+    );
+  }
+
+  useEffect(() => {
+    console.table(cart);
+  }, [cart]);
+
   return (
     <>
       <h1 className="font-red-hat my-8 ml-6 text-5xl font-bold text-rose-900">
         Desserts
       </h1>
       {menu.map((food, index) => {
+        const selectedFood = cart.find(
+          (item) => item.id === `${food.name}-${food.price}`,
+        );
+
         return (
           <div
             className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center"
@@ -52,35 +82,37 @@ function App() {
               alt={food.name}
               className="rounded-[12px]"
             />
-
-            {/* <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
-              <button>
+            {selectedFood ? (
+              <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+                <button onClick={() => decrement(selectedFood)}>
+                  <img
+                    src={minus}
+                    alt="Icon decrement"
+                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                  />
+                </button>
+                <p>{selectedFood?.quantity || 0}</p>
+                <button onClick={() => increment(selectedFood)}>
+                  <img
+                    src={plus}
+                    alt="Icon decrement"
+                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+                  />
+                </button>
+              </div>
+            ) : (
+              <button
+                className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
+                onClick={() => handleAddFood(food)}
+              >
                 <img
-                  src={minus}
-                  alt="Icon decrement"
-                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                />
+                  src={cartIcon}
+                  alt="Add to cart icon"
+                  className="scale-110"
+                />{" "}
+                Add to Cart
               </button>
-              <p>1</p>
-              <button>
-                <img
-                  src={plus}
-                  alt="Icon decrement"
-                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                />
-              </button>
-            </div> */}
-            <button
-              className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
-              onClick={() => handleAddFood(food)}
-            >
-              <img
-                src={cartIcon}
-                alt="Add to cart icon"
-                className="scale-110"
-              />{" "}
-              Add to Cart
-            </button>
+            )}
 
             <small className="mt-4 text-[16px] font-medium text-rose-500">
               {food.category}
