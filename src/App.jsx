@@ -280,12 +280,8 @@ function CartList({ totalFood, totalPrice, cart, onDeleteFood }) {
         );
       })}
 
-      <div className="mr-6 mb-6 ml-6 flex items-center justify-between">
-        <p className="text-[16px] font-semibold text-rose-500">Order Total</p>
-        <p className="text-[28px] font-bold text-rose-900">
-          ${Number(totalPrice).toFixed(2)}
-        </p>
-      </div>
+      <OrderTotal totalPrice={totalPrice} />
+
       <div className="mr-6 mb-6 ml-6 flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-6 py-3">
         <img src={iconCarbon} alt="Icon Carbon Neutral" />
         <p className="text-sm font-medium text-rose-500">
@@ -324,6 +320,17 @@ function ListFoodInsideCart({ priceFoods, selectedFood, food, onDeleteFood }) {
           className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
         />
       </button>
+    </div>
+  );
+}
+
+function OrderTotal({ totalPrice }) {
+  return (
+    <div className="mr-6 mb-6 ml-6 flex items-center justify-between">
+      <p className="text-[16px] font-semibold text-rose-500">Order Total</p>
+      <p className="text-[28px] font-bold text-rose-900">
+        ${Number(totalPrice).toFixed(2)}
+      </p>
     </div>
   );
 }
