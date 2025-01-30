@@ -100,72 +100,12 @@ function App() {
       })}
 
       {totalFood ? (
-        <div className="font-red-hat mx-auto mt-6 mb-6 flex w-[335px] flex-col justify-center rounded-2xl bg-white">
-          <h3 className="text-reds my-7 ml-6 text-2xl font-bold">
-            Your Cart ({totalFood})
-          </h3>
-
-          {cart.map((food, index) => {
-            const priceFoods = food.price * food.quantity;
-            const selectedFood = cart.find(
-              (item) => item.id === `${food.name}-${food.price}`,
-            );
-
-            return (
-              <div
-                className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4"
-                key={index + 1}
-              >
-                <div className="flex flex-col">
-                  <p className="text-[16px] font-semibold text-rose-900">
-                    {food.name}
-                  </p>
-                  <small className="mt-2 text-[16px]">
-                    <span className="text-reds font-semibold">
-                      {food.quantity}x
-                    </span>
-                    <span className="ml-4 font-medium text-rose-400">
-                      @ ${Number(food.price).toFixed(2)}
-                    </span>
-                    <span className="ml-1 font-semibold text-rose-500">
-                      {" "}
-                      ${Number(priceFoods).toFixed(2)}
-                    </span>
-                  </small>
-                </div>
-                <button onClick={() => handleDeleteFood(selectedFood)}>
-                  <img
-                    src={iconRemove}
-                    alt="icon remove"
-                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
-                  />
-                </button>
-              </div>
-            );
-          })}
-          <div className="mr-6 mb-6 ml-6 flex items-center justify-between">
-            <p className="text-[16px] font-semibold text-rose-500">
-              Order Total
-            </p>
-            <p className="text-[28px] font-bold text-rose-900">
-              ${Number(totalPrice).toFixed(2)}
-            </p>
-          </div>
-          <div className="mr-6 mb-6 ml-6 flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-6 py-3">
-            <img src={iconCarbon} alt="Icon Carbon Neutral" />
-            <p className="text-sm font-medium text-rose-500">
-              This is a
-              <span className="font-semibold text-rose-900">
-                {" "}
-                carbon-neutral{" "}
-              </span>
-              delivery
-            </p>
-          </div>
-          <button className="bg-reds mx-auto mb-6 w-[85%] rounded-full py-4 font-semibold text-white">
-            Confirm Order
-          </button>
-        </div>
+        <CartList
+          totalFood={totalFood}
+          totalPrice={totalPrice}
+          cart={cart}
+          onDeleteFood={handleDeleteFood}
+        />
       ) : (
         <div className="font-red-hat mx-auto mt-6 mb-6 flex w-[335px] flex-col justify-center rounded-2xl bg-white">
           <h3 className="text-reds mt-7 ml-6 text-2xl font-bold">
@@ -323,6 +263,72 @@ function AddToCart({ food, onAddFood }) {
       <img src={cartIcon} alt="Add to cart icon" className="scale-110" /> Add to
       Cart
     </button>
+  );
+}
+
+function CartList({ totalFood, totalPrice, cart, onDeleteFood }) {
+  return (
+    <div className="font-red-hat mx-auto mt-6 mb-6 flex w-[335px] flex-col justify-center rounded-2xl bg-white">
+      <h3 className="text-reds my-7 ml-6 text-2xl font-bold">
+        Your Cart ({totalFood})
+      </h3>
+
+      {cart.map((food, index) => {
+        const priceFoods = food.price * food.quantity;
+        const selectedFood = cart.find(
+          (item) => item.id === `${food.name}-${food.price}`,
+        );
+
+        return (
+          <div
+            className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4"
+            key={index + 1}
+          >
+            <div className="flex flex-col">
+              <p className="text-[16px] font-semibold text-rose-900">
+                {food.name}
+              </p>
+              <small className="mt-2 text-[16px]">
+                <span className="text-reds font-semibold">
+                  {food.quantity}x
+                </span>
+                <span className="ml-4 font-medium text-rose-400">
+                  @ ${Number(food.price).toFixed(2)}
+                </span>
+                <span className="ml-1 font-semibold text-rose-500">
+                  {" "}
+                  ${Number(priceFoods).toFixed(2)}
+                </span>
+              </small>
+            </div>
+            <button onClick={() => onDeleteFood(selectedFood)}>
+              <img
+                src={iconRemove}
+                alt="icon remove"
+                className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
+              />
+            </button>
+          </div>
+        );
+      })}
+      <div className="mr-6 mb-6 ml-6 flex items-center justify-between">
+        <p className="text-[16px] font-semibold text-rose-500">Order Total</p>
+        <p className="text-[28px] font-bold text-rose-900">
+          ${Number(totalPrice).toFixed(2)}
+        </p>
+      </div>
+      <div className="mr-6 mb-6 ml-6 flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-6 py-3">
+        <img src={iconCarbon} alt="Icon Carbon Neutral" />
+        <p className="text-sm font-medium text-rose-500">
+          This is a
+          <span className="font-semibold text-rose-900"> carbon-neutral </span>
+          delivery
+        </p>
+      </div>
+      <button className="bg-reds mx-auto mb-6 w-[85%] rounded-full py-4 font-semibold text-white">
+        Confirm Order
+      </button>
+    </div>
   );
 }
 
