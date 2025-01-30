@@ -78,6 +78,7 @@ function App() {
 
   return (
     <>
+      {/* <div className="fixed top-0 right-0 left-0 z-[998] bg-black/50"> */}
       <h1 className="font-red-hat my-8 ml-6 text-5xl font-bold text-rose-900">
         Desserts
       </h1>
@@ -87,53 +88,14 @@ function App() {
         );
 
         return (
-          <div
-            className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center"
+          <FoodList
             key={index + 1}
-          >
-            <img
-              src={food.image.mobile}
-              alt={food.name}
-              className="rounded-[12px]"
-            />
-            {selectedFood ? (
-              <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
-                <button onClick={() => decrement(selectedFood)}>
-                  <img
-                    src={minus}
-                    alt="Icon decrement"
-                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                  />
-                </button>
-                <p>{selectedFood?.quantity || 0}</p>
-                <button onClick={() => increment(selectedFood)}>
-                  <img
-                    src={plus}
-                    alt="Icon decrement"
-                    className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
-                  />
-                </button>
-              </div>
-            ) : (
-              <button
-                className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
-                onClick={() => handleAddFood(food)}
-              >
-                <img
-                  src={cartIcon}
-                  alt="Add to cart icon"
-                  className="scale-110"
-                />{" "}
-                Add to Cart
-              </button>
-            )}
-
-            <small className="mt-4 text-[16px] font-medium text-rose-500">
-              {food.category}
-            </small>
-            <p className="text-lg font-semibold text-rose-900">{food.name}</p>
-            <p className="text-reds text-lg font-semibold">${food.price}</p>
-          </div>
+            food={food}
+            selectedFood={selectedFood}
+            increment={increment}
+            decrement={decrement}
+            onAddFood={handleAddFood}
+          />
         );
       })}
 
@@ -218,83 +180,133 @@ function App() {
         </div>
       )}
 
-      <div className="font-red-hat fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8">
-        <img src={orderSuccess} alt="icon order confirmation" />
-        <h1 className="mt-4 text-5xl leading-14 font-bold text-rose-900">
-          Order Confirmed
-        </h1>
-        <small className="mt-1 text-[16px] font-medium text-rose-500">
-          We hope you enjoy your food!
-        </small>
+      {/* <div className="font-red-hat fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8">
+          <img src={orderSuccess} alt="icon order confirmation" />
+          <h1 className="mt-4 text-5xl leading-14 font-bold text-rose-900">
+            Order Confirmed
+          </h1>
+          <small className="mt-1 text-[16px] font-medium text-rose-500">
+            We hope you enjoy your food!
+          </small>
 
-        <div className="my-6 w-full rounded-lg bg-rose-50 px-4 py-6">
-          <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
-            <img
-              src={tiramisu}
-              alt="classic tiramisu"
-              className="h-12 w-12 rounded-sm"
-            />
-            <div className="ml-4 flex flex-col">
-              <p className="text-sm font-semibold text-rose-900">
-                Classic Tiramissu
+          <div className="my-6 w-full rounded-lg bg-rose-50 px-4 py-6">
+            <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
+              <img
+                src={tiramisu}
+                alt="classic tiramisu"
+                className="h-12 w-12 rounded-sm"
+              />
+              <div className="ml-4 flex flex-col">
+                <p className="text-sm font-semibold text-rose-900">
+                  Classic Tiramissu
+                </p>
+                <small className="mt-2 text-sm">
+                  <span className="text-reds font-semibold">1x</span>
+                  <span className="ml-4 font-medium text-rose-400">
+                    @ $5.50
+                  </span>
+                </small>
+              </div>
+              <p className="ml-auto text-sm font-semibold text-rose-500">
+                $5.50
               </p>
-              <small className="mt-2 text-sm">
-                <span className="text-reds font-semibold">1x</span>
-                <span className="ml-4 font-medium text-rose-400">@ $5.50</span>
-              </small>
             </div>
-            <p className="ml-auto text-sm font-semibold text-rose-500">$5.50</p>
-          </div>
-          <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
-            <img
-              src={vanillaBean}
-              alt="vanilla bean creme"
-              className="h-12 w-12 rounded-sm"
-            />
-            <div className="ml-4 flex flex-col">
-              <p className="text-sm font-semibold text-rose-900">
-                Vanilla Bean Creme B...
+            <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
+              <img
+                src={vanillaBean}
+                alt="vanilla bean creme"
+                className="h-12 w-12 rounded-sm"
+              />
+              <div className="ml-4 flex flex-col">
+                <p className="text-sm font-semibold text-rose-900">
+                  Vanilla Bean Creme B...
+                </p>
+                <small className="mt-2 text-sm">
+                  <span className="text-reds font-semibold">4x</span>
+                  <span className="ml-4 font-medium text-rose-400">
+                    @ $7.00
+                  </span>
+                </small>
+              </div>
+              <p className="ml-auto text-sm font-semibold text-rose-500">
+                $28.00
               </p>
-              <small className="mt-2 text-sm">
-                <span className="text-reds font-semibold">4x</span>
-                <span className="ml-4 font-medium text-rose-400">@ $7.00</span>
-              </small>
             </div>
-            <p className="ml-auto text-sm font-semibold text-rose-500">
-              $28.00
-            </p>
-          </div>
-          <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
-            <img
-              src={vanillaPanna}
-              alt="vanilla panna"
-              className="h-12 w-12 rounded-sm"
-            />
-            <div className="ml-4 flex flex-col">
-              <p className="text-sm font-semibold text-rose-900">
-                Vanilla Panna Cotta
+            <div className="mb-4 flex w-full items-center border-b border-rose-100 pb-4">
+              <img
+                src={vanillaPanna}
+                alt="vanilla panna"
+                className="h-12 w-12 rounded-sm"
+              />
+              <div className="ml-4 flex flex-col">
+                <p className="text-sm font-semibold text-rose-900">
+                  Vanilla Panna Cotta
+                </p>
+                <small className="mt-2 text-sm">
+                  <span className="text-reds font-semibold">2x</span>
+                  <span className="ml-4 font-medium text-rose-400">
+                    @ $6.50
+                  </span>
+                </small>
+              </div>
+              <p className="ml-auto text-sm font-semibold text-rose-500">
+                $13.00
               </p>
-              <small className="mt-2 text-sm">
-                <span className="text-reds font-semibold">2x</span>
-                <span className="ml-4 font-medium text-rose-400">@ $6.50</span>
-              </small>
             </div>
-            <p className="ml-auto text-sm font-semibold text-rose-500">
-              $13.00
-            </p>
+
+            <div className="mx-auto flex items-center justify-between">
+              <p className="text-sm font-semibold text-rose-500">Order Total</p>
+              <p className="text-2xl font-bold text-rose-900">$46.50</p>
+            </div>
           </div>
 
-          <div className="mx-auto flex items-center justify-between">
-            <p className="text-sm font-semibold text-rose-500">Order Total</p>
-            <p className="text-2xl font-bold text-rose-900">$46.50</p>
-          </div>
-        </div>
-
-        <button className="bg-reds mx-auto mb-6 w-full rounded-full py-4 font-semibold text-white">
-          Start New Order
-        </button>
-      </div>
+          <button className="bg-reds mx-auto mb-6 w-full rounded-full py-4 font-semibold text-white">
+            Start New Order
+          </button>
+        </div> */}
+      {/* </div> */}
     </>
+  );
+}
+
+function FoodList({ food, selectedFood, increment, decrement, onAddFood }) {
+  return (
+    <div className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center">
+      <img src={food.image.mobile} alt={food.name} className="rounded-[12px]" />
+      {selectedFood ? (
+        <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+          <button onClick={() => decrement(selectedFood)}>
+            <img
+              src={minus}
+              alt="Icon decrement"
+              className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+            />
+          </button>
+          <p>{selectedFood?.quantity || 0}</p>
+          <button onClick={() => increment(selectedFood)}>
+            <img
+              src={plus}
+              alt="Icon decrement"
+              className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
+            />
+          </button>
+        </div>
+      ) : (
+        <button
+          className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
+          onClick={() => onAddFood(food)}
+        >
+          <img src={cartIcon} alt="Add to cart icon" className="scale-110" />{" "}
+          Add to Cart
+        </button>
+      )}
+
+      <small className="mt-4 text-[16px] font-medium text-rose-500">
+        {food.category}
+      </small>
+      <p className="text-lg font-semibold text-rose-900">{food.name}</p>
+      <p className="text-reds text-lg font-semibold">${food.price}</p>
+    </div>
   );
 }
 
