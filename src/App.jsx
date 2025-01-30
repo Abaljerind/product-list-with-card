@@ -9,14 +9,39 @@ import iconCarbon from "/images/icon-carbon-neutral.svg";
 
 document.body.style.backgroundColor = "rgb(254, 250, 247)";
 function App() {
-  const [data, setData] = useState(foodData);
+  const [menu, setMenu] = useState(foodData);
+  const [cart, setCart] = useState([]);
+
+  function handleAddFood(food) {
+    const id = `${food.name}-${food.price}`;
+
+    const newFood = {
+      id,
+      name: food.name,
+      price: food.price,
+      quantity: 1,
+    };
+
+    const existingFood = cart.find((item) => item.id === newFood.id);
+    if (existingFood) {
+      setCart((prevCart) =>
+        prevCart.map((item) => {
+          return item.id === id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item;
+        }),
+      );
+    } else {
+      setCart((prevCart) => [...prevCart, newFood]);
+    }
+  }
 
   return (
     <>
       <h1 className="font-red-hat my-8 ml-6 text-5xl font-bold text-rose-900">
         Desserts
       </h1>
-      {data.map((food, index) => {
+      {menu.map((food, index) => {
         return (
           <div
             className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center"
@@ -28,7 +53,7 @@ function App() {
               className="rounded-[12px]"
             />
 
-            <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
+            {/* <div className="bg-reds mx-auto -mt-[30px] flex w-44 items-center justify-between gap-2 rounded-full px-3 py-3 font-semibold text-white">
               <button>
                 <img
                   src={minus}
@@ -44,18 +69,18 @@ function App() {
                   className="h-8 w-8 scale-[60%] rounded-full border-2 border-white object-contain p-1"
                 />
               </button>
-            </div>
-            {/* <button
-                className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
-                onClick={() => handleAddFood(food)}
-              >
-                <img
-                  src={cartIcon}
-                  alt="Add to cart icon"
-                  className="scale-110"
-                />{" "}
-                Add to Cart
-              </button> */}
+            </div> */}
+            <button
+              className="mx-auto -mt-6 flex flex-wrap gap-2 rounded-full border-2 border-rose-300 bg-white px-6 py-3 font-semibold text-rose-900"
+              onClick={() => handleAddFood(food)}
+            >
+              <img
+                src={cartIcon}
+                alt="Add to cart icon"
+                className="scale-110"
+              />{" "}
+              Add to Cart
+            </button>
 
             <small className="mt-4 text-[16px] font-medium text-rose-500">
               {food.category}
