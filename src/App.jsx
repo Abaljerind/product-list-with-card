@@ -217,7 +217,9 @@ function FoodList({ food, selectedFood, increment, decrement, onAddFood }) {
         {food.category}
       </small>
       <p className="text-lg font-semibold text-rose-900">{food.name}</p>
-      <p className="text-reds text-lg font-semibold">${food.price}</p>
+      <p className="text-reds text-lg font-semibold">
+        ${Number(food.price).toFixed(2)}
+      </p>
     </div>
   );
 }
