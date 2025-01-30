@@ -58,6 +58,12 @@ function App() {
     );
   }
 
+  const totalFood = cart.reduce((acc, { ...curr }) => acc + curr.quantity, 0);
+  const totalPrice = cart.reduce(
+    (acc, { ...curr }) => acc + curr.quantity * curr.price,
+    0,
+  );
+
   useEffect(() => {
     console.table(cart);
   }, [cart]);
@@ -125,69 +131,49 @@ function App() {
 
       <div className="font-red-hat mx-auto mt-6 mb-6 flex w-[335px] flex-col justify-center rounded-2xl bg-white">
         <h3 className="text-reds my-7 ml-6 text-2xl font-bold">
-          Your Cart (7)
+          Your Cart ({totalFood})
         </h3>
 
-        <div className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4">
-          <div className="flex flex-col">
-            <p className="text-[16px] font-semibold text-rose-900">
-              Classic Tiramisu
-            </p>
-            <small className="mt-2 text-[16px]">
-              <span className="text-reds font-semibold">1x</span>
-              <span className="ml-4 font-medium text-rose-400">@ $5.50</span>
-              <span className="ml-1 font-semibold text-rose-500"> $5.50</span>
-            </small>
-          </div>
-          <button>
-            <img
-              src={iconRemove}
-              alt="icon remove"
-              className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
-            />
-          </button>
-        </div>
-        <div className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4">
-          <div className="flex flex-col">
-            <p className="text-[16px] font-semibold text-rose-900">
-              Vanilla Bean Creme Brulee
-            </p>
-            <small className="mt-2 text-[16px]">
-              <span className="text-reds font-semibold">4x</span>
-              <span className="ml-4 font-medium text-rose-400">@ $7.00</span>
-              <span className="ml-1 font-semibold text-rose-500"> $28.00</span>
-            </small>
-          </div>
-          <button>
-            <img
-              src={iconRemove}
-              alt="icon remove"
-              className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
-            />
-          </button>
-        </div>
-        <div className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4">
-          <div className="flex flex-col">
-            <p className="text-[16px] font-semibold text-rose-900">
-              Vanilla Panna Cotta
-            </p>
-            <small className="mt-2 text-[16px]">
-              <span className="text-reds font-semibold">2x</span>
-              <span className="ml-4 font-medium text-rose-400">@ $6.50</span>
-              <span className="ml-1 font-semibold text-rose-500"> $13.00</span>
-            </small>
-          </div>
-          <button>
-            <img
-              src={iconRemove}
-              alt="icon remove"
-              className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
-            />
-          </button>
-        </div>
+        {cart.map((food, index) => {
+          const priceFoods = food.price * food.quantity;
+
+          return (
+            <div
+              className="mr-6 mb-6 ml-6 flex justify-between border-b border-rose-100 pb-4"
+              key={index + 1}
+            >
+              <div className="flex flex-col">
+                <p className="text-[16px] font-semibold text-rose-900">
+                  {food.name}
+                </p>
+                <small className="mt-2 text-[16px]">
+                  <span className="text-reds font-semibold">
+                    {food.quantity}x
+                  </span>
+                  <span className="ml-4 font-medium text-rose-400">
+                    @ ${Number(food.price).toFixed(2)}
+                  </span>
+                  <span className="ml-1 font-semibold text-rose-500">
+                    {" "}
+                    ${Number(priceFoods).toFixed(2)}
+                  </span>
+                </small>
+              </div>
+              <button>
+                <img
+                  src={iconRemove}
+                  alt="icon remove"
+                  className="h-8 w-8 scale-[60%] rounded-full border-2 border-rose-300 object-contain p-1"
+                />
+              </button>
+            </div>
+          );
+        })}
         <div className="mr-6 mb-6 ml-6 flex items-center justify-between">
           <p className="text-[16px] font-semibold text-rose-500">Order Total</p>
-          <p className="text-[28px] font-bold text-rose-900">$46.50</p>
+          <p className="text-[28px] font-bold text-rose-900">
+            ${Number(totalPrice).toFixed(2)}
+          </p>
         </div>
         <div className="mr-6 mb-6 ml-6 flex items-center justify-center gap-2 rounded-xl bg-rose-50 px-6 py-3">
           <img src={iconCarbon} alt="Icon Carbon Neutral" />
