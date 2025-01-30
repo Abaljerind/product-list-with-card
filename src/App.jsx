@@ -64,6 +64,10 @@ function App() {
     0,
   );
 
+  function handleDeleteFood(food) {
+    setCart((prevCart) => prevCart.filter((item) => item.id !== food.id));
+  }
+
   useEffect(() => {
     console.table(cart);
   }, [cart]);
@@ -136,6 +140,9 @@ function App() {
 
         {cart.map((food, index) => {
           const priceFoods = food.price * food.quantity;
+          const selectedFood = cart.find(
+            (item) => item.id === `${food.name}-${food.price}`,
+          );
 
           return (
             <div
@@ -159,7 +166,7 @@ function App() {
                   </span>
                 </small>
               </div>
-              <button>
+              <button onClick={() => handleDeleteFood(selectedFood)}>
                 <img
                   src={iconRemove}
                   alt="icon remove"
