@@ -8,6 +8,7 @@ export default function CartList({
   totalPrice,
   cart,
   onDeleteFood,
+  onConfirmedOrder,
 }) {
   return (
     <div className="font-red-hat mx-auto mt-6 mb-6 flex w-[335px] flex-col justify-center rounded-2xl bg-white">
@@ -42,7 +43,10 @@ export default function CartList({
           delivery
         </p>
       </div>
-      <button className="bg-reds mx-auto mb-6 w-[85%] rounded-full py-4 font-semibold text-white">
+      <button
+        className="bg-reds mx-auto mb-6 w-[85%] rounded-full py-4 font-semibold text-white"
+        onClick={onConfirmedOrder}
+      >
         Confirm Order
       </button>
     </div>
