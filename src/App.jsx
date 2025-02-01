@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Main from "./pages/Main";
 
 import foodData from "../data.json";
@@ -71,10 +71,6 @@ function App() {
     setIsOrderConfirmed(false);
     setCart([]);
   }
-
-  useEffect(() => {
-    console.table(cart);
-  }, [cart]);
 
   return (
     <>
