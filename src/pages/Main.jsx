@@ -1,6 +1,7 @@
 import MenuFood from "../components/MenuFood";
 import CartSummary from "../components/CartSummary";
 import { Title } from "../components/Title";
+import OrderConfirmed from "./OrderConfirmed";
 
 export default function Main({
   menu,
@@ -33,6 +34,8 @@ export default function Main({
         cart={cart}
         onDeleteFood={onDeleteFood}
       />
+
+      <OrderConfirmed cart={cart} totalPrice={totalPrice} />
     </>
   );
 }
