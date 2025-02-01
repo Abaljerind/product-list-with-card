@@ -6,6 +6,7 @@ export default function CartSummary({
   totalPrice,
   cart,
   onDeleteFood,
+  onConfirmedOrder,
 }) {
   return (
     <>
@@ -15,6 +16,7 @@ export default function CartSummary({
           totalPrice={totalPrice}
           cart={cart}
           onDeleteFood={onDeleteFood}
+          onConfirmedOrder={onConfirmedOrder}
         />
       ) : (
         <EmptyCartList />
