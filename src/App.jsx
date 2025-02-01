@@ -7,6 +7,7 @@ document.body.style.backgroundColor = "rgb(254, 250, 247)";
 function App() {
   const [menu, setMenu] = useState(foodData);
   const [cart, setCart] = useState([]);
+  const [isOrderConfirmed, setIsOrderConfirmed] = useState(false);
 
   function handleAddFood(food) {
     const id = `${food.name}-${food.price}`;
@@ -62,13 +63,21 @@ function App() {
     setCart((prevCart) => prevCart.filter((item) => item.id !== food.id));
   }
 
+  function handleConfirmedOrder() {
+    setIsOrderConfirmed(true);
+  }
+
+  function handleNewOrder() {
+    setIsOrderConfirmed(false);
+    setCart([]);
+  }
+
   useEffect(() => {
     console.table(cart);
   }, [cart]);
 
   return (
     <>
-      {/* <div className="fixed top-0 right-0 left-0 z-[998] bg-black/50"> */}
       <Main
         menu={menu}
         cart={cart}
@@ -76,8 +85,10 @@ function App() {
         increment={increment}
         decrement={decrement}
         onDeleteFood={handleDeleteFood}
+        isOrderConfirmed={isOrderConfirmed}
+        onConfirmedOrder={handleConfirmedOrder}
+        onNewOrder={handleNewOrder}
       />
-      {/* </div> */}
     </>
   );
 }
