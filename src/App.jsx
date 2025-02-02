@@ -18,9 +18,6 @@ function App() {
       price: food.price,
       quantity: 1,
       imageThumbnail: food.image.thumbnail,
-      imageMobile: food.image.mobile,
-      imageTablet: food.image.tablet,
-      imageDesktop: food.image.desktop,
     };
 
     const existingFood = cart.find((item) => item.id === newFood.id);

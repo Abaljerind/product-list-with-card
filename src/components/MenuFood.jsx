@@ -8,7 +8,7 @@ export default function MenuFood({
   onAddFood,
 }) {
   return (
-    <>
+    <div className="md:flex md:flex-wrap md:px-8">
       {menu.map((food, index) => {
         const selectedFood = cart.find(
           (item) => item.id === `${food.name}-${food.price}`,
@@ -25,6 +25,6 @@ export default function MenuFood({
           />
         );
       })}
-    </>
+    </div>
   );
 }
