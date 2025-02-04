@@ -9,7 +9,7 @@ export default function CartSummary({
   onConfirmedOrder,
 }) {
   return (
-    <>
+    <div className="lg:-mt-24">
       {totalFood ? (
         <CartList
           totalFood={totalFood}
@@ -21,6 +21,6 @@ export default function CartSummary({
       ) : (
         <EmptyCartList />
       )}
-    </>
+    </div>
   );
 }

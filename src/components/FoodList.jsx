@@ -9,7 +9,7 @@ export default function FoodList({
   onAddFood,
 }) {
   return (
-    <div className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center md:mb-10 md:w-64">
+    <div className="font-red-hat mx-auto mb-6 flex w-[335px] flex-col justify-center md:mb-10 md:w-64 lg:w-72">
       <picture>
         {/* Image for desktop */}
         <source srcSet={food.image.desktop} media="(min-width: 1024px)" />
