@@ -2,6 +2,7 @@ import MenuFood from "../components/MenuFood";
 import CartSummary from "../components/CartSummary";
 import { Title } from "../components/Title";
 import OrderConfirmed from "./OrderConfirmed";
+import { useEffect } from "react";
 
 export default function Main({
   menu,
@@ -20,48 +21,36 @@ export default function Main({
     0,
   );
 
+  useEffect(() => {
+    if (isOrderConfirmed) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isOrderConfirmed]);
+
   return (
     <>
-      {!isOrderConfirmed ? (
-        <>
-          <Title />
-          <div className="lg:flex">
-            <MenuFood
-              menu={menu}
-              cart={cart}
-              onAddFood={onAddFood}
-              increment={increment}
-              decrement={decrement}
-            />
+      <Title />
+      <div className="lg:flex">
+        <MenuFood
+          menu={menu}
+          cart={cart}
+          onAddFood={onAddFood}
+          increment={increment}
+          decrement={decrement}
+        />
 
-            <CartSummary
-              totalFood={totalFood}
-              totalPrice={totalPrice}
-              cart={cart}
-              onDeleteFood={onDeleteFood}
-              onConfirmedOrder={onConfirmedOrder}
-            />
-          </div>
-        </>
-      ) : (
-        <div className="fixed top-0 right-0 left-0 z-[998] bg-black/50">
-          <Title />
-          <MenuFood
-            menu={menu}
-            cart={cart}
-            onAddFood={onAddFood}
-            increment={increment}
-            decrement={decrement}
-          />
-
-          <CartSummary
-            totalFood={totalFood}
-            totalPrice={totalPrice}
-            cart={cart}
-            onDeleteFood={onDeleteFood}
-            onConfirmedOrder={onConfirmedOrder}
-          />
-
+        <CartSummary
+          totalFood={totalFood}
+          totalPrice={totalPrice}
+          cart={cart}
+          onDeleteFood={onDeleteFood}
+          onConfirmedOrder={onConfirmedOrder}
+        />
+      </div>
+      {isOrderConfirmed && (
+        <div className="fixed inset-0 z-[999] flex h-full w-full items-center justify-center bg-black/50">
           <OrderConfirmed
             cart={cart}
             totalPrice={totalPrice}
