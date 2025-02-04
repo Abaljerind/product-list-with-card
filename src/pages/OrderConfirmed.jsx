@@ -2,7 +2,7 @@ import orderSuccess from "/images/icon-order-confirmed.svg";
 
 export default function OrderConfirmed({ cart, totalPrice, onNewOrder }) {
   return (
-    <div className="font-red-hat md: no-scrollbar fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8 md:left-[50%] md:w-[80%] md:-translate-x-[50%] lg:h-[80%] lg:w-[35%] lg:rounded-xl">
+    <div className="font-red-hat md: no-scrollbar fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8 md:left-[50%] md:w-[80%] md:-translate-x-[50%] lg:top-[50%] lg:h-fit lg:w-[37%] lg:-translate-y-[50%] lg:rounded-xl lg:py-6">
       <img src={orderSuccess} alt="icon order confirmation" />
       <h1 className="mt-4 text-5xl leading-14 font-bold text-rose-900">
         Order Confirmed
@@ -56,7 +56,7 @@ export default function OrderConfirmed({ cart, totalPrice, onNewOrder }) {
       </div>
 
       <button
-        className="bg-reds mx-auto mb-6 w-full rounded-full py-4 font-semibold text-white md:w-[90%]"
+        className="bg-reds mx-auto w-full rounded-full py-4 font-semibold text-white md:w-[90%] lg:w-full"
         onClick={onNewOrder}
       >
         Start New Order
