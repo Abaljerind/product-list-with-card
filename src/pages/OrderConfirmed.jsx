@@ -2,7 +2,7 @@ import orderSuccess from "/images/icon-order-confirmed.svg";
 
 export default function OrderConfirmed({ cart, totalPrice, onNewOrder }) {
   return (
-    <div className="font-red-hat md: fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8 md:left-[50%] md:w-[80%] md:-translate-x-[50%]">
+    <div className="font-red-hat md: no-scrollbar fixed bottom-0 z-[999] flex h-full max-h-[85vh] w-full flex-col items-start overflow-y-scroll rounded-2xl bg-white px-5 py-8 md:left-[50%] md:w-[80%] md:-translate-x-[50%] lg:h-[80%] lg:w-[35%] lg:rounded-xl">
       <img src={orderSuccess} alt="icon order confirmation" />
       <h1 className="mt-4 text-5xl leading-14 font-bold text-rose-900">
         Order Confirmed
@@ -12,7 +12,7 @@ export default function OrderConfirmed({ cart, totalPrice, onNewOrder }) {
       </small>
 
       {/* food list */}
-      <div className="my-6 w-full rounded-lg bg-rose-50 px-4 py-6 md:mx-auto md:w-[90%]">
+      <div className="my-6 w-full rounded-lg bg-rose-50 px-4 py-6 md:mx-auto md:w-[90%] lg:w-full">
         {cart.map((food, index) => {
           return (
             <div
