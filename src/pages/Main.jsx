@@ -25,21 +25,23 @@ export default function Main({
       {!isOrderConfirmed ? (
         <>
           <Title />
-          <MenuFood
-            menu={menu}
-            cart={cart}
-            onAddFood={onAddFood}
-            increment={increment}
-            decrement={decrement}
-          />
+          <div className="lg:flex">
+            <MenuFood
+              menu={menu}
+              cart={cart}
+              onAddFood={onAddFood}
+              increment={increment}
+              decrement={decrement}
+            />
 
-          <CartSummary
-            totalFood={totalFood}
-            totalPrice={totalPrice}
-            cart={cart}
-            onDeleteFood={onDeleteFood}
-            onConfirmedOrder={onConfirmedOrder}
-          />
+            <CartSummary
+              totalFood={totalFood}
+              totalPrice={totalPrice}
+              cart={cart}
+              onDeleteFood={onDeleteFood}
+              onConfirmedOrder={onConfirmedOrder}
+            />
+          </div>
         </>
       ) : (
         <div className="fixed top-0 right-0 left-0 z-[998] bg-black/50">
